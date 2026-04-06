@@ -1,5 +1,7 @@
 # API Testing Framework By ssrjkk
 
+[![CI](https://github.com/ssrjkk/API-test-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/ssrjkk/API-test-framework/actions)
+
 Мой фреймворк для тестирования API на Python.
 
 ## Тестируемые API
