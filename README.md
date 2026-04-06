@@ -497,3 +497,7 @@ markers =
 | Линт | `ruff check . && black --check .` |
 | Типы | `mypy api core models validators` |
 | K8s apply | `kubectl apply -f k8s/` |
+
+Telegram: @ssrjkk
+Email: ray013lefe@gmail.com
+GitHub: https://github.com/ssrjkk
