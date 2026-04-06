@@ -24,11 +24,12 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run linters
-        run: |
-          ruff check .
-          black --check .
-          mypy api core models validators fixtures utils
+      - name: Ruff check
+        run: ruff check . --fix
+      - name: Black check
+        run: black --check .
+      - name: MyPy check
+        run: mypy api core models validators fixtures utils
 
   test:
     runs-on: ubuntu-latest

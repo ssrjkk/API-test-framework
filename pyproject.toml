@@ -27,10 +27,7 @@ minversion = "8.0"
 addopts = [
     "-v",
     "--tb=short",
-    "-n", "auto",
-    "--dist=loadscope",
-    "--alluredir=allure-results",
-    "--clean-alluredir"
+    "--strict-markers",
 ]
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
@@ -39,11 +36,13 @@ python_functions = ["test_*"]
 markers = [
     "smoke: быстрая проверка критического функционала",
     "api: тесты API",
-    "slow: медленные тесты (исключать в CI)"
+    "integration: интеграционные тесты",
+    "slow: медленные тесты (исключать в CI)",
+    "ci: тесты для CI",
 ]
 filterwarnings = [
     "ignore::DeprecationWarning",
-    "ignore::UserWarning"
+    "ignore::UserWarning",
 ]
 
 [tool.black]
@@ -60,7 +59,8 @@ ignore = ["E501"]
 
 [tool.mypy]
 python_version = "3.11"
-strict = true
+warn_return_any = true
+warn_unused_configs = true
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

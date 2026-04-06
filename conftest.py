@@ -13,7 +13,7 @@ from fixtures.data_fixtures import TEST_DATA
 
 logging.basicConfig(
     level=logging.INFO if os.getenv("CI") else logging.DEBUG,
-    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger(__name__)
 
