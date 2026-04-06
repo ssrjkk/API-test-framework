@@ -33,18 +33,15 @@ def create_retry_decorator(
     def before_sleep(retry_state: Any) -> None:
         exc = retry_state.outcome.exception() if retry_state.outcome else "Unknown"
         logger.warning(
-            f"Повторная попытка {retry_state.attempt_number}/{max_attempts} " f"после ошибки: {exc}"
+            f"Повторная попытка {retry_state.attempt_number}/{max_attempts} после ошибки: {exc}"
         )
 
-    return cast(
-        Callable[[F], F],
-        retry(
-            stop=stop_after_attempt(max_attempts),
-            wait=wait_fixed(delay),
-            retry=retry_if_exception_type(retryable_exceptions),
-            reraise=True,
-            before_sleep=before_sleep,
-        ),
+    return retry(
+        stop=stop_after_attempt(max_attempts),
+        wait=wait_fixed(delay),
+        retry=retry_if_exception_type(retryable_exceptions),
+        reraise=True,
+        before_sleep=before_sleep,
     )
 
 

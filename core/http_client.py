@@ -185,7 +185,7 @@ class HTTPClient:
 
         if response.status_code >= 500:
             logger.warning(
-                f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms) " f"[SERVER ERROR]"
+                f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms) [SERVER ERROR]"
             )
         elif response.status_code >= 400:
             logger.warning(f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms)")

@@ -1,5 +1,5 @@
 import json
-from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, cast
+from typing import Any, Callable, Dict, List, Optional, Type, TypeVar
 
 import requests
 from pydantic import BaseModel, ValidationError
@@ -179,7 +179,7 @@ class ResponseValidator:
 
     def model(self, model_class: Type[T]) -> T:
         try:
-            return cast(T, model_class.model_validate(self.data))
+            return model_class.model_validate(self.data)
         except ValidationError as e:
             error_msg = f"Ошибка валидации модели {model_class.__name__}: {e}"
             self._errors.append(error_msg)
