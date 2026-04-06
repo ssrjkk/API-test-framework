@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  tests:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      - ENV=test
+      - BASE_URL=https://api.hh.ru
+      - TIMEOUT=10
+      - MAX_RETRIES=3
+      - LOG_LEVEL=INFO
+    volumes:
+      - ../..:/app
+    command: python -m pytest tests/ -v --tb=short
+
+  lint:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.test
+    environment:
+      - ENV=test
+    volumes:
+      - ../..:/app
+    command: bash -c "ruff check . && black --check ."
+
+  tests-parallel:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      - ENV=test
+      - BASE_URL=https://api.hh.ru
+      - TIMEOUT=10
+      - MAX_RETRIES=3
+    volumes:
+      - ../..:/app
+    command: python -m pytest tests/ -v -n auto

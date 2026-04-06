@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-tests-config
+  namespace: default
+data:
+  ENV: "prod"
+  BASE_URL: "https://api.hh.ru"
+  TIMEOUT: "10"
+  MAX_RETRIES: "3"
+  LOG_LEVEL: "INFO"
