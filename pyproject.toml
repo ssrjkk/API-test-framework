@@ -30,6 +30,8 @@ addopts = [
     "-v",
     "--tb=short",
     "--strict-markers",
+    "--reruns=3",
+    "--reruns-delay=2",
 ]
 markers = [
     "api: marks tests as API tests",

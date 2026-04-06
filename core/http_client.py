@@ -4,10 +4,11 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+
 from core.config import get_config
 from utils.logger import logger
 
-MIN_REQUEST_INTERVAL = 0.5
+MIN_REQUEST_INTERVAL = 1.0
 
 _last_request_time: float = 0.0
 
@@ -47,7 +48,7 @@ class HTTPClient:
 
         retry_strategy = Retry(
             total=self.max_retries,
-            backoff_factor=1,
+            backoff_factor=3,
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
         )

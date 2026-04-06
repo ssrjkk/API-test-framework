@@ -5,6 +5,7 @@ tenacity>=8.2.0
 allure-pytest>=2.13.2
 python-dotenv>=1.0.1
 pytest-xdist>=3.5.0
+pytest-rerunfailures>=14.0
 
 ruff>=0.1.0
 black>=23.12.0
