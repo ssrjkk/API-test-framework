@@ -28,7 +28,7 @@ jobs:
         run: |
           ruff check .
           black --check .
-          mypy . --exclude venv --exclude .venv
+          mypy api core models validators fixtures utils
 
   test:
     runs-on: ubuntu-latest
