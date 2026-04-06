@@ -1,4 +1,5 @@
 import pytest
+from typing import Generator, cast
 
 from core.http_client import HTTPClient
 from api.vacancies_api import VacanciesApi
@@ -8,7 +9,7 @@ from fixtures.data_fixtures import TEST_DATA
 
 
 @pytest.fixture(scope="session")
-def http_client() -> HTTPClient:
+def http_client() -> Generator[HTTPClient, None, None]:
     client = HTTPClient()
     yield client
     client.close()
@@ -35,10 +36,10 @@ def test_data() -> dict:
 
 
 @pytest.fixture
-def valid_search_queries() -> list:
-    return TEST_DATA["search_queries"]["valid"]
+def valid_search_queries() -> list[str]:
+    return cast(list[str], TEST_DATA["search_queries"]["valid"])
 
 
 @pytest.fixture
-def known_areas() -> dict:
-    return TEST_DATA["areas"]
+def known_areas() -> dict[str, str]:
+    return cast(dict[str, str], TEST_DATA["areas"])

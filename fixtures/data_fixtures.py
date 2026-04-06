@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, cast
 
 
 def load_test_data() -> Dict[str, Any]:
@@ -8,7 +8,7 @@ def load_test_data() -> Dict[str, Any]:
 
     if data_file.exists():
         with open(data_file, "r", encoding="utf-8") as f:
-            return json.load(f)
+            return cast(Dict[str, Any], json.load(f))
 
     return {
         "search_queries": {

@@ -7,6 +7,18 @@ from urllib3.util.retry import Retry
 from core.config import get_config
 from utils.logger import logger
 
+MIN_REQUEST_INTERVAL = 0.5
+
+_last_request_time: float = 0.0
+
+
+def _throttle() -> None:
+    global _last_request_time
+    elapsed = time.monotonic() - _last_request_time
+    if elapsed < MIN_REQUEST_INTERVAL:
+        time.sleep(MIN_REQUEST_INTERVAL - elapsed)
+    _last_request_time = time.monotonic()
+
 
 class HTTPClient:
     def __init__(
@@ -52,6 +64,7 @@ class HTTPClient:
         params: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
+        _throttle()
         url = self._build_url(path)
         logger.info(f"GET {url} params={params}")
 
@@ -78,6 +91,7 @@ class HTTPClient:
         json: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
+        _throttle()
         url = self._build_url(path)
         logger.info(f"POST {url} json={json}")
 
@@ -101,6 +115,7 @@ class HTTPClient:
         json: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
+        _throttle()
         url = self._build_url(path)
         logger.info(f"PUT {url} json={json}")
 
@@ -119,6 +134,7 @@ class HTTPClient:
         path: str,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
+        _throttle()
         url = self._build_url(path)
         logger.info(f"DELETE {url}")
 
