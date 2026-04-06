@@ -36,7 +36,7 @@ def create_retry_decorator(
             f"Повторная попытка {retry_state.attempt_number}/{max_attempts} после ошибки: {exc}"
         )
 
-    return retry(
+    return retry(  # type: ignore[no-any-return]
         stop=stop_after_attempt(max_attempts),
         wait=wait_fixed(delay),
         retry=retry_if_exception_type(retryable_exceptions),

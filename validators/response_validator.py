@@ -179,7 +179,7 @@ class ResponseValidator:
 
     def model(self, model_class: Type[T]) -> T:
         try:
-            return model_class.model_validate(self.data)
+            return model_class.model_validate(self.data)  # type: ignore[no-any-return]
         except ValidationError as e:
             error_msg = f"Ошибка валидации модели {model_class.__name__}: {e}"
             self._errors.append(error_msg)
