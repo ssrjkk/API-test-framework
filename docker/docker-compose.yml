@@ -8,12 +8,12 @@ services:
     environment:
       - ENV=test
       - BASE_URL=https://api.hh.ru
-      - TIMEOUT=10
+      - TIMEOUT=30
       - MAX_RETRIES=3
-      - LOG_LEVEL=INFO
+      - CI=true
     volumes:
-      - ../..:/app
-    command: python -m pytest tests/ -v --tb=short
+      - ..:/app
+    command: python -m pytest tests/ -v --tb=short -n auto --dist=loadscope
 
   lint:
     build:
@@ -22,7 +22,7 @@ services:
     environment:
       - ENV=test
     volumes:
-      - ../..:/app
+      - ..:/app
     command: bash -c "ruff check . && black --check ."
 
   tests-parallel:
@@ -32,8 +32,9 @@ services:
     environment:
       - ENV=test
       - BASE_URL=https://api.hh.ru
-      - TIMEOUT=10
+      - TIMEOUT=30
       - MAX_RETRIES=3
+      - CI=true
     volumes:
-      - ../..:/app
-    command: python -m pytest tests/ -v -n auto
+      - ..:/app
+    command: python -m pytest tests/ -v -n auto --dist=loadscope

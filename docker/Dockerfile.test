@@ -7,7 +7,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
@@ -15,8 +14,8 @@ COPY . .
 ENV PYTHONUNBUFFERED=1
 ENV ENV=test
 
-RUN ruff check . --output-format=text || true
+RUN ruff check . || true
 RUN black --check . || true
-RUN mypy api core models validators || true
+RUN mypy api core models validators fixtures utils || true
 
 CMD ["python", "-m", "pytest", "tests/", "-v", "--tb=short"]

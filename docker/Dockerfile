@@ -7,12 +7,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 ENV PYTHONUNBUFFERED=1
 ENV ENV=prod
+ENV BASE_URL=https://api.hh.ru
+ENV TIMEOUT=30
 
-CMD ["python", "-m", "pytest", "tests/", "-v"]
+EXPOSE 8000
+
+CMD ["python", "-m", "pytest", "tests/", "-v", "--tb=short"]
