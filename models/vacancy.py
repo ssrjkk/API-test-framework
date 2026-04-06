@@ -1,19 +1,16 @@
-from pydantic import BaseModel
 from typing import Any, Optional, List, Dict
 
-
-class BaseApiModel(BaseModel):
-    model_config = {"extra": "ignore", "populate_by_name": True}
+from models import БазовыйМодель
 
 
-class Salary(BaseApiModel):
+class Salary(БазовыйМодель):
     from_value: Optional[int] = None
     to_value: Optional[int] = None
     currency: Optional[str] = None
     gross: Optional[bool] = None
 
 
-class Employer(BaseApiModel):
+class Employer(БазовыйМодель):
     id: str
     name: str
     alternate_url: Optional[str] = None
@@ -21,13 +18,13 @@ class Employer(BaseApiModel):
     trusted: Optional[bool] = None
 
 
-class Area(BaseApiModel):
+class Area(БазовыйМодель):
     id: str
     name: str
     url: Optional[str] = None
 
 
-class Vacancy(BaseApiModel):
+class Vacancy(БазовыйМодель):
     id: str
     name: str
     employer: Optional[Dict[str, Any]] = None
@@ -43,7 +40,7 @@ class Vacancy(BaseApiModel):
     response_url: Optional[str] = None
 
 
-class VacancySearchResponse(BaseApiModel):
+class VacancySearchResponse(БазовыйМодель):
     items: List[Vacancy]
     found: int = 0
     pages: int = 1

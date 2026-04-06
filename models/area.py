@@ -1,10 +1,9 @@
-from pydantic import BaseModel
 from typing import Optional, List
 
+from models.base_model import БазовыйМодель
 
-class AreaModel(BaseModel):
-    model_config = {"extra": "ignore", "populate_by_name": True}
 
+class AreaModel(БазовыйМодель):
     id: str
     name: str
     parent_id: Optional[str] = None

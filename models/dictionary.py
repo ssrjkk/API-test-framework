@@ -1,17 +1,14 @@
-from pydantic import BaseModel
 from typing import List
 
+from models.base_model import БазовыйМодель
 
-class DictionaryItem(BaseModel):
-    model_config = {"extra": "ignore", "populate_by_name": True}
 
+class DictionaryItem(БазовыйМодель):
     id: str
     name: str
 
 
-class DictionariesResponse(BaseModel):
-    model_config = {"extra": "ignore", "populate_by_name": True}
-
+class DictionariesResponse(БазовыйМодель):
     vacancy_type: List[DictionaryItem] = []
     experience: List[DictionaryItem] = []
     employment: List[DictionaryItem] = []
