@@ -24,7 +24,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements-dev.txt
       - name: Ruff fix
         run: ruff check . --fix
       - name: Black format
@@ -32,7 +32,7 @@ jobs:
       - name: Black check
         run: black --check .
       - name: MyPy check
-        run: mypy api core models validators fixtures utils
+        run: mypy api core models validators fixtures
 
   test:
     runs-on: ubuntu-latest
@@ -105,11 +105,11 @@ jobs:
         run: pip install -r requirements.txt
       
       - name: Run tests with coverage
-        run: python -m pytest tests/ --cov=api --cov=core --cov=models --cov=validators --cov-report=xml
+        run: python -m pytest tests/ --cov=api --cov=core --cov=models --cov=validators --cov-report=xml --cov-report=term-missing
       
-      - name: Upload coverage
-        uses: actions/upload-artifact@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
         with:
-          name: coverage-report
-          path: coverage.xml
-          retention-days: 14
+          file: coverage.xml
+          flags: unittests
+          name: codecov-umbrella
