@@ -1,6 +1,6 @@
 from functools import wraps
 from collections.abc import Callable
-from typing import Any
+from typing import Any, TypeVar, cast
 
 from tenacity import (
     retry_if_exception_type,
@@ -10,6 +10,8 @@ from tenacity import (
 )
 
 from utils.logger import logger
+
+F = TypeVar("F", bound=Callable[..., Any])
 
 
 class RetryableError(Exception):
@@ -24,7 +26,7 @@ def create_retry_decorator(
     max_attempts: int = 3,
     delay: float = 1.0,
     retryable_exceptions: tuple[type[Exception], ...] | None = None,
-) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
+) -> Callable[[F], F]:
     if retryable_exceptions is None:
         retryable_exceptions = (RetryableError,)
 
@@ -34,20 +36,23 @@ def create_retry_decorator(
             f"Повторная попытка {retry_state.attempt_number}/{max_attempts} " f"после ошибки: {exc}"
         )
 
-    return retry(
-        stop=stop_after_attempt(max_attempts),
-        wait=wait_fixed(delay),
-        retry=retry_if_exception_type(retryable_exceptions),
-        reraise=True,
-        before_sleep=before_sleep,
+    return cast(
+        Callable[[F], F],
+        retry(
+            stop=stop_after_attempt(max_attempts),
+            wait=wait_fixed(delay),
+            retry=retry_if_exception_type(retryable_exceptions),
+            reraise=True,
+            before_sleep=before_sleep,
+        ),
     )
 
 
 def retry_on_5xx_or_timeout(
     max_attempts: int = 3,
     delay: float = 1.0,
-) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
-    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+) -> Callable[[F], F]:
+    def decorator(func: F) -> F:
         def before_sleep(retry_state: Any) -> None:
             exc_type = (
                 type(retry_state.outcome.exception()).__name__ if retry_state.outcome else "Unknown"
@@ -65,6 +70,6 @@ def retry_on_5xx_or_timeout(
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             return func(*args, **kwargs)
 
-        return wrapper
+        return cast(F, wrapper)
 
     return decorator
