@@ -1,3 +1,4 @@
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -18,23 +19,48 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-.tox/
-.env
-.venv
-env/
+
+# Virtual environments
 venv/
 ENV/
+env/
+.venv/
+
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-*~
-.DS_Store
-report.xml
+
+# Test & coverage
+.pytest_cache/
+.coverage
 coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# Allure
+allure-results/
+allure-report/
+
+# Environment
+.env
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test results
+report.xml
+report-*.xml
+smoke-report.xml
+
+# Ruff & mypy
 .ruff_cache/
 .mypy_cache/

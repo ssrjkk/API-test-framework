@@ -1,16 +1,33 @@
+import os
 import pytest
-from typing import Generator, cast
+import logging
+from typing import Generator
 
+from core.config import get_config, Config
 from core.http_client import HTTPClient
 from api.vacancies_api import VacanciesApi
 from api.areas_api import AreasApi
 from api.dictionaries_api import DictionariesApi
 from fixtures.data_fixtures import TEST_DATA
 
+logging.basicConfig(
+    level=logging.INFO if os.getenv("CI") else logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+)
+logger = logging.getLogger(__name__)
+
 
 @pytest.fixture(scope="session")
-def http_client() -> Generator[HTTPClient, None, None]:
-    client = HTTPClient()
+def config() -> Config:
+    return get_config()
+
+
+@pytest.fixture(scope="session")
+def http_client(config: Config) -> Generator[HTTPClient, None, None]:
+    client = HTTPClient(
+        base_url=config.base_url,
+        timeout=config.timeout,
+    )
     yield client
     client.close()
 
@@ -37,9 +54,9 @@ def test_data() -> dict:
 
 @pytest.fixture
 def valid_search_queries() -> list[str]:
-    return cast(list[str], TEST_DATA["search_queries"]["valid"])
+    return list(TEST_DATA["search_queries"]["valid"])
 
 
 @pytest.fixture
 def known_areas() -> dict[str, str]:
-    return cast(dict[str, str], TEST_DATA["areas"])
+    return dict(TEST_DATA["areas"])
