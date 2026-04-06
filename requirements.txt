@@ -1,10 +1,11 @@
-# Runtime зависимости (для запуска тестов)
+# Тестирование
 pytest>=8.1.1
 pytest-xdist>=3.5.0
 pytest-rerunfailures>=14.0
 pytest-html>=4.1.1
 allure-pytest>=2.13.2
 pytest-cov>=4.1.0
+responses>=0.24.0
 
 # HTTP и валидация
 requests>=2.31.0
