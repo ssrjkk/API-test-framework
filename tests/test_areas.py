@@ -3,7 +3,6 @@ import allure
 
 from api.areas_api import AreasApi
 from validators.response_validator import ResponseValidator
-from models import AreaModel
 
 
 @allure.feature("Areas API")

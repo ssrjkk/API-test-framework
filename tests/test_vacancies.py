@@ -3,7 +3,6 @@ import allure
 
 from api.vacancies_api import VacanciesApi
 from validators.response_validator import ResponseValidator
-from models import VacancySearchResponse, Vacancy
 
 
 @allure.feature("Vacancies API")

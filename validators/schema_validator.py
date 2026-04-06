@@ -1,7 +1,6 @@
 from typing import Any, Dict, List, Optional
 
-from jsonschema import validate, ValidationError, Draft7Validator
-from jsonschema.exceptions import best_match
+from jsonschema import ValidationError, Draft7Validator
 
 from utils.logger import logger
 
