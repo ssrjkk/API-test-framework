@@ -1,27 +1,20 @@
 from typing import Optional, Dict, Any
 import time
+import threading
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-
 
 from core.config import get_config
 from utils.logger import logger
 
 MIN_REQUEST_INTERVAL = 1.0
 
-_last_request_time: float = 0.0
-
-
-def _throttle() -> None:
-    global _last_request_time
-    elapsed = time.monotonic() - _last_request_time
-    if elapsed < MIN_REQUEST_INTERVAL:
-        time.sleep(MIN_REQUEST_INTERVAL - elapsed)
-    _last_request_time = time.monotonic()
-
 
 class HTTPClient:
+    _lock = threading.Lock()
+    _last_request_time: float = 0.0
+
     def __init__(
         self,
         base_url: Optional[str] = None,
@@ -53,11 +46,22 @@ class HTTPClient:
             allowed_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
         )
 
-        adapter = HTTPAdapter(max_retries=retry_strategy)
+        adapter = HTTPAdapter(
+            max_retries=retry_strategy,
+            pool_connections=10,
+            pool_maxsize=20,
+        )
         self.session.mount("http://", adapter)
         self.session.mount("https://", adapter)
 
-        logger.info(f"HTTPClient инициализирован: base_url={self.base_url}, timeout={self.timeout}")
+        logger.info(f"HTTPClient initialized: base_url={self.base_url}, timeout={self.timeout}")
+
+    def _throttle(self) -> None:
+        with HTTPClient._lock:
+            elapsed = time.monotonic() - HTTPClient._last_request_time
+            if elapsed < MIN_REQUEST_INTERVAL:
+                time.sleep(MIN_REQUEST_INTERVAL - elapsed)
+            HTTPClient._last_request_time = time.monotonic()
 
     def get(
         self,
@@ -65,7 +69,7 @@ class HTTPClient:
         params: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
-        _throttle()
+        self._throttle()
         url = self._build_url(path)
         logger.info(f"GET {url} params={params}")
 
@@ -80,10 +84,10 @@ class HTTPClient:
             self._log_response("GET", url, response, start_time)
             return response
         except requests.exceptions.Timeout as e:
-            logger.error(f"Timeout при GET {url}: {e}")
+            logger.error(f"Timeout on GET {url}: {e}")
             raise
         except requests.exceptions.ConnectionError as e:
-            logger.error(f"ConnectionError при GET {url}: {e}")
+            logger.error(f"ConnectionError on GET {url}: {e}")
             raise
 
     def post(
@@ -92,7 +96,7 @@ class HTTPClient:
         json: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
-        _throttle()
+        self._throttle()
         url = self._build_url(path)
         logger.info(f"POST {url} json={json}")
 
@@ -107,7 +111,10 @@ class HTTPClient:
             self._log_response("POST", url, response, start_time)
             return response
         except requests.exceptions.Timeout as e:
-            logger.error(f"Timeout при POST {url}: {e}")
+            logger.error(f"Timeout on POST {url}: {e}")
+            raise
+        except requests.exceptions.ConnectionError as e:
+            logger.error(f"ConnectionError on POST {url}: {e}")
             raise
 
     def put(
@@ -116,37 +123,51 @@ class HTTPClient:
         json: Optional[Dict[str, Any]] = None,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
-        _throttle()
+        self._throttle()
         url = self._build_url(path)
         logger.info(f"PUT {url} json={json}")
 
         start_time = time.time()
-        response = self.session.put(
-            url,
-            json=json,
-            headers=headers,
-            timeout=self.timeout,
-        )
-        self._log_response("PUT", url, response, start_time)
-        return response
+        try:
+            response = self.session.put(
+                url,
+                json=json,
+                headers=headers,
+                timeout=self.timeout,
+            )
+            self._log_response("PUT", url, response, start_time)
+            return response
+        except requests.exceptions.Timeout as e:
+            logger.error(f"Timeout on PUT {url}: {e}")
+            raise
+        except requests.exceptions.ConnectionError as e:
+            logger.error(f"ConnectionError on PUT {url}: {e}")
+            raise
 
     def delete(
         self,
         path: str,
         headers: Optional[Dict[str, str]] = None,
     ) -> requests.Response:
-        _throttle()
+        self._throttle()
         url = self._build_url(path)
         logger.info(f"DELETE {url}")
 
         start_time = time.time()
-        response = self.session.delete(
-            url,
-            headers=headers,
-            timeout=self.timeout,
-        )
-        self._log_response("DELETE", url, response, start_time)
-        return response
+        try:
+            response = self.session.delete(
+                url,
+                headers=headers,
+                timeout=self.timeout,
+            )
+            self._log_response("DELETE", url, response, start_time)
+            return response
+        except requests.exceptions.Timeout as e:
+            logger.error(f"Timeout on DELETE {url}: {e}")
+            raise
+        except requests.exceptions.ConnectionError as e:
+            logger.error(f"ConnectionError on DELETE {url}: {e}")
+            raise
 
     def _build_url(self, path: str) -> str:
         if path.startswith("http"):
@@ -165,7 +186,7 @@ class HTTPClient:
         if response.status_code >= 500:
             logger.warning(
                 f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms) "
-                f"[ОШИБКА СЕРВЕРА]"
+                f"[SERVER ERROR]"
             )
         elif response.status_code >= 400:
             logger.warning(f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms)")
@@ -174,4 +195,4 @@ class HTTPClient:
 
     def close(self) -> None:
         self.session.close()
-        logger.info("HTTPClient сессия закрыта")
+        logger.info("HTTPClient session closed")
