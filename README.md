@@ -38,7 +38,7 @@
 ┌─────────────────────────────────────────────────────────────────┐
 │                     API Layer (api/)                            │
 │  ┌─────────────────────────────────────────────────────────────┐│
-│  │ VacanciesApi  │  AreasApi  │  DictionariesApi  │ BaseApi   ││
+│  │ VacanciesApi  │  AreasApi  │  DictionariesApi  │ BaseApi    ││
 │  └─────────────────────────────────────────────────────────────┘│
 │                                                                 │
 │  Тесты НЕ вызывают HTTP клиент напрямую                         │
@@ -51,7 +51,7 @@
 │  ┌─────────────────────────────────────────────────────────────┐│
 │  │              HTTPClient (requests.Session)                  ││
 │  │  - Connection pooling                                       ││
-│  │  - Automatic retry на 5xx (urllib3 Retry)                  ││
+│  │  - Automatic retry на 5xx (urllib3 Retry)                   ││
 │  │  - Configurable timeouts                                    ││
 │  │  - Request/response logging                                 ││
 │  └─────────────────────────────────────────────────────────────┘│
@@ -62,14 +62,14 @@
 │                      Внешний API (hh.ru)                        │
 └─────────────────────────────────────────────────────────────────┘
 
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│ Validators/ │    │   Models/   │    │  Fixtures/  │
-│             │    │             │    │             │
-│ - Response  │    │ - Vacancy   │    │ - http_client
-│ - Schema    │    │ - Area      │    │ - vacancies_api
-│             │    │ - Dictionary│    │ - areas_api
-└─────────────┘    └─────────────┘    └─────────────┘
-```
+┌─────────────┐    ┌─────────────┐    ┌────────────────┐
+│ Validators/ │    │   Models/   │    │  Fixtures/     │
+│             │    │             │    │                │
+│ - Response  │    │ - Vacancy   │    │ - http_client  │
+│ - Schema    │    │ - Area      │    │ - vacancies_api│
+│             │    │ - Dictionary│    │ - areas_api    │ 
+└─────────────┘    └─────────────┘    └────────────────┘
+
 
 ### Слои абстракции
 
