@@ -18,9 +18,9 @@ class Config:
 
 def get_config() -> Config:
     base_url = os.getenv("BASE_URL", "https://api.hh.ru")
-    timeout = int(os.getenv("TIMEOUT", "10"))
-    max_retries = int(os.getenv("MAX_RETRIES", "3"))
-    retry_delay = float(os.getenv("RETRY_DELAY", "1.0"))
+    timeout = int(os.getenv("TIMEOUT", "30"))
+    max_retries = int(os.getenv("MAX_RETRIES", "5"))
+    retry_delay = float(os.getenv("RETRY_DELAY", "2.0"))
     log_level = os.getenv("LOG_LEVEL", "INFO")
 
     return Config(
