@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/ssrjkk/API-test-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/ssrjkk/API-test-framework/actions)
 
-Мой фреймворк для тестирования API на Python.
+Мой фреймворк для тестирования API на Python. QA фреймворк: pytest + requests + Pydantic + retry логика + Docker + GitHub Actions CI/CD
 
 ## Тестируемые API
 
