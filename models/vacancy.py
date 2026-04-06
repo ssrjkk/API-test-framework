@@ -1,6 +1,6 @@
 from typing import Any, Dict, List, Optional
 
-from models import БазовыйМодель
+from models.base_model import БазовыйМодель
 
 
 class Salary(БазовыйМодель):

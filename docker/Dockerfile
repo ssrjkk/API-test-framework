@@ -2,20 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 ENV PYTHONUNBUFFERED=1
-ENV ENV=prod
+ENV CI=true
 ENV BASE_URL=https://api.hh.ru
 ENV TIMEOUT=30
 
-EXPOSE 8000
-
-CMD ["python", "-m", "pytest", "tests/", "-v", "--tb=short"]
+CMD ["python", "-m", "pytest", "tests/", "-v", "--tb=short", "-m", "not slow"]

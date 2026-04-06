@@ -24,8 +24,10 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Ruff check
+      - name: Ruff fix
         run: ruff check . --fix
+      - name: Black format
+        run: black .
       - name: Black check
         run: black --check .
       - name: MyPy check

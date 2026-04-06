@@ -16,6 +16,6 @@ ENV ENV=test
 
 RUN ruff check . || true
 RUN black --check . || true
-RUN mypy api core models validators fixtures utils || true
+RUN mypy api core models validators fixtures
 
 CMD ["python", "-m", "pytest", "tests/", "-v", "--tb=short"]
