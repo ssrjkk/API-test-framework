@@ -48,7 +48,7 @@ filterwarnings = [
 
 [tool.black]
 line-length = 99
-target-version = "py311"
+target-version = ["py311"]
 
 [tool.ruff]
 line-length = 99
