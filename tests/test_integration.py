@@ -1,9 +1,9 @@
-import pytest
 import allure
+import pytest
 
-from api.vacancies_api import VacanciesApi
 from api.areas_api import AreasApi
 from api.dictionaries_api import DictionariesApi
+from api.vacancies_api import VacanciesApi
 from validators.response_validator import ResponseValidator
 
 

@@ -1,12 +1,12 @@
-from functools import wraps
 from collections.abc import Callable
+from functools import wraps
 from typing import Any, TypeVar, cast
 
 from tenacity import (
+    retry,
     retry_if_exception_type,
     stop_after_attempt,
     wait_fixed,
-    retry,
 )
 
 from utils.logger import logger

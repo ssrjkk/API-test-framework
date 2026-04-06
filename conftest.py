@@ -1,13 +1,14 @@
-import os
-import pytest
 import logging
+import os
 from typing import Generator
 
-from core.config import get_config, Config
-from core.http_client import HTTPClient
-from api.vacancies_api import VacanciesApi
+import pytest
+
 from api.areas_api import AreasApi
 from api.dictionaries_api import DictionariesApi
+from api.vacancies_api import VacanciesApi
+from core.config import Config, get_config
+from core.http_client import HTTPClient
 from fixtures.data_fixtures import TEST_DATA
 
 logging.basicConfig(

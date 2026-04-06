@@ -1,5 +1,5 @@
-import pytest
 import allure
+import pytest
 
 from api.dictionaries_api import DictionariesApi
 from validators.response_validator import ResponseValidator

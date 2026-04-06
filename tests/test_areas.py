@@ -1,5 +1,5 @@
-import pytest
 import allure
+import pytest
 
 from api.areas_api import AreasApi
 from validators.response_validator import ResponseValidator

@@ -1,5 +1,5 @@
-import pytest
 import allure
+import pytest
 
 from api.vacancies_api import VacanciesApi
 from validators.response_validator import ResponseValidator

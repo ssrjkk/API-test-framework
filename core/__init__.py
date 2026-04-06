@@ -1,6 +1,6 @@
-from core.config import get_config, Config
+from core.config import Config, get_config
 from core.http_client import HTTPClient
-from core.retry import retry_on_5xx_or_timeout, create_retry_decorator
+from core.retry import create_retry_decorator, retry_on_5xx_or_timeout
 
 __all__ = [
     "get_config",
