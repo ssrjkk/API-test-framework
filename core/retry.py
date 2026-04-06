@@ -31,8 +31,7 @@ def create_retry_decorator(
     def before_sleep(retry_state: Any) -> None:
         exc = retry_state.outcome.exception() if retry_state.outcome else "Unknown"
         logger.warning(
-            f"Повторная попытка {retry_state.attempt_number}/{max_attempts} "
-            f"после ошибки: {exc}"
+            f"Повторная попытка {retry_state.attempt_number}/{max_attempts} " f"после ошибки: {exc}"
         )
 
     return retry(
@@ -51,9 +50,7 @@ def retry_on_5xx_or_timeout(
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         def before_sleep(retry_state: Any) -> None:
             exc_type = (
-                type(retry_state.outcome.exception()).__name__
-                if retry_state.outcome
-                else "Unknown"
+                type(retry_state.outcome.exception()).__name__ if retry_state.outcome else "Unknown"
             )
             logger.warning(f"Попытка {retry_state.attempt_number}/{max_attempts}: {exc_type}")
 
