@@ -38,6 +38,7 @@ markers = [
     "integration: marks tests as integration tests",
     "smoke: marks tests as smoke tests",
     "slow: marks tests as slow",
+    "ci: marks tests for CI only",
 ]
 filterwarnings = [
     "ignore::DeprecationWarning",
