@@ -93,7 +93,7 @@
 
 ## Структура проекта
 
-```
+``
 api-testing-framework/
 ├── core/                       # Базовые компоненты фреймворка
 │   ├── http_client.py          # requests.Session + retry + logging
