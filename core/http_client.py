@@ -52,7 +52,7 @@ class HTTPClient:
         )
 
         retry_strategy = Retry(
-            total=self.max_retries,
+            total=0,
             backoff_factor=0.5,
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
