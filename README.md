@@ -1,6 +1,10 @@
-# API Testing Framework
+# API Testing Framework By ssrjkk
 
-Production-ready фреймворк для тестирования REST API.
+Мой фреймворк для тестирования API на Python.
+
+## Тестируемые API
+
+- [hh.ru](https://api.hh.ru) - поиск вакансий, регионы, справочники
 
 > Архитектура системы тестирования, а не набор тестов.
 
