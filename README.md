@@ -499,7 +499,8 @@ markers =
 | Типы | `mypy api core models validators` |
 | K8s apply | `kubectl apply -f k8s/` |
 
-## Контакты
+
+## Contacts
 - Telegram: @ssrjkk
 - Email: ray013lefe@gmail.com
 - GitHub: https://github.com/ssrjkk
