@@ -1,7 +1,9 @@
 # API Testing Framework By ssrjkk
 
-[![CI](https://github.com/ssrjkk/API-test-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/ssrjkk/API-test-framework/actions)
-[![codecov](https://codecov.io/gh/ssrjkk/API-test-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/ssrjkk/API-test-framework)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![pytest](https://img.shields.io/badge/pytest-8.1-green)
+![CI](https://github.com/ssrjkk/hh-api-framework/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen)
 
 Мой фреймворк для тестирования API на Python. QA фреймворк: pytest + requests + Pydantic + retry логика + Docker + GitHub Actions CI/CD
 
