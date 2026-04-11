@@ -1,9 +1,12 @@
 # API Testing Framework By ssrjkk
 
-![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
-![pytest](https://img.shields.io/badge/pytest-8.1-green)
+![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-8.1-green?logo=pytest&logoColor=white)
+![requests](https://img.shields.io/badge/requests-2.31-orange)
+![Pydantic](https://img.shields.io/badge/Pydantic-v2-red)
+![Allure](https://img.shields.io/badge/Allure-report-ff69b4)
+![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker&logoColor=white)
 ![CI](https://github.com/ssrjkk/hh-api-framework/actions/workflows/ci.yml/badge.svg)
-![Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen)
 
 Мой фреймворк для тестирования API на Python. QA фреймворк: pytest + requests + Pydantic + retry логика + Docker + GitHub Actions CI/CD
 
