@@ -1,14 +1,12 @@
 # API Testing Framework By ssrjkk
 
 ![CI](https://github.com/ssrjkk/hh-api-framework/actions/workflows/ci.yml/badge.svg)
-![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
 ![pytest](https://img.shields.io/badge/pytest-8.1-green?logo=pytest&logoColor=white)
 ![Pydantic](https://img.shields.io/badge/Pydantic-v2-red)
 ![requests](https://img.shields.io/badge/requests-2.31-orange)
 ![Allure](https://img.shields.io/badge/Allure-report-ff69b4)
 ![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/K8s-supported-blue?logo=kubernetes&logoColor=white)
-![CI](https://github.com/ssrjkk/hh-api-framework/actions/workflows/ci.yml/badge.svg)
 ![Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen)
 
 > 🎯 100+ API-тестов | ⚡ Полный прогон: ~45 сек | 🛡 Стабильность: 99.2% | 🐳 Docker & K8s ready
