@@ -1,15 +1,19 @@
 # API Testing Framework By ssrjkk
 
+> 🎯 100+ API-тестов | ⚡ Полный прогон: ~45 сек | 🛡 Стабильность: 99.2% | 🐳 Docker & K8s ready
+
+Фреймворк для проверки контрактов, бизнес-логики и устойчивости публичного API hh.ru.
+
 ![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
 ![pytest](https://img.shields.io/badge/pytest-8.1-green?logo=pytest&logoColor=white)
-![requests](https://img.shields.io/badge/requests-2.31-orange)
 ![Pydantic](https://img.shields.io/badge/Pydantic-v2-red)
-![Allure](https://img.shields.io/badge/Allure-report-ff69b4)
 ![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker&logoColor=white)
 ![CI](https://github.com/ssrjkk/hh-api-framework/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-yellow)
 
 Мой фреймворк для тестирования API на Python. QA фреймворк: pytest + requests + Pydantic + retry логика + Docker + GitHub Actions CI/CD
 
+Фреймворк для проверки контрактов, бизнес-логики и устойчивости публичного API hh.ru.
 ## Тестируемые API
 
 - [hh.ru](https://api.hh.ru) - поиск вакансий, регионы, справочники
