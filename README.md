@@ -1,5 +1,20 @@
 # API Testing Framework By ssrjkk
 
+![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-8.1-green?logo=pytest&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-v2-red)
+![requests](https://img.shields.io/badge/requests-2.31-orange)
+![Allure](https://img.shields.io/badge/Allure-report-ff69b4)
+![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/K8s-supported-blue?logo=kubernetes&logoColor=white)
+![CI](https://github.com/ssrjkk/hh-api-framework/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen)
+![Tests](https://img.shields.io/badge/tests-100+-brightgreen)
+![Run](https://img.shields.io/badge/run-~45sec-blue)
+![Stability](https://img.shields.io/badge/stability-99.2%25-green)
+![Last Commit](https://img.shields.io/github/last-commit/ssrjkk/hh-api-framework)
+![License](https://img.shields.io/badge/license-MIT-yellow)
+
 > 🎯 100+ API-тестов | ⚡ Полный прогон: ~45 сек | 🛡 Стабильность: 99.2% | 🐳 Docker & K8s ready
 
 Мой фреймворк для тестирования API на Python. QA фреймворк: pytest + requests + Pydantic + retry логика + Docker + GitHub Actions CI/CD
