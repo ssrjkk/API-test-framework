@@ -82,13 +82,13 @@
 │                      Внешний API (hh.ru)                         │
 └──────────────────────────────────────────────────────────────────┘
 
-┌─────────────┐    ┌─────────────┐    ┌────────────────┐
-│ Validators/ │    │   Models/   │    │  Fixtures/     │
-│             │    │             │    │                │
-│ - Response  │    │ - Vacancy   │    │ - http_client  │
-│ - Schema    │    │ - Area      │    │ - vacancies_api│
-│             │    │ - Dictionary│    │ - areas_api    │ 
-└─────────────┘    └─────────────┘    └────────────────┘
+┌─────────────┐    ┌──────────────┐    ┌─────────────────┐
+│ Validators/ │    │   Models/    │    │  Fixtures/      │
+│             │    │              │    │                 │
+│ - Response  │    │ - Vacancy    │    │ - http_client   │
+│ - Schema    │    │ - Area       │    │ - vacancies_api │
+│             │    │ - Dictionary │    │ - areas_api     │ 
+└─────────────┘    └──────────────┘    └─────────────────┘
 
 
 ### Слои абстракции
@@ -115,63 +115,63 @@
 
 ``
 api-testing-framework/
-├── core/                       # Базовые компоненты фреймворка
-│   ├── http_client.py          # requests.Session + retry + logging
-│   ├── config.py               # dataclass Config из env vars
-│   └── retry.py                # tenacity декораторы
+├── core/                        # Базовые компоненты фреймворка
+│   ├── http_client.py           # requests.Session + retry + logging
+│   ├── config.py                # dataclass Config из env vars
+│   └── retry.py                 # tenacity декораторы
 │
-├── api/                        # API слой (абстракция над HTTP)
-│   ├── base_api.py             # Базовый класс с get/post/put/delete
-│   ├── vacancies_api.py        # /vacancies endpoints
-│   ├── areas_api.py            # /areas endpoints
-│   └── dictionaries_api.py     # /dictionaries endpoints
+├── api/                         # API слой (абстракция над HTTP)
+│   ├── base_api.py              # Базовый класс с get/post/put/delete
+│   ├── vacancies_api.py         # /vacancies endpoints
+│   ├── areas_api.py             # /areas endpoints
+│   └── dictionaries_api.py      # /dictionaries endpoints
 │
-├── models/                     # Pydantic модели (DTO)
-│   ├── vacancy.py              # Vacancy, VacancySearchResponse
-│   ├── area.py                 # AreaModel
-│   └── dictionary.py           # DictionariesResponse
+├── models/                      # Pydantic модели (DTO)
+│   ├── vacancy.py               # Vacancy, VacancySearchResponse
+│   ├── area.py                  # AreaModel
+│   └── dictionary.py            # DictionariesResponse
 │
 ├── validators/                  # Валидаторы ответов
-│   ├── response_validator.py   # Fluent DSL .status().has_key().json_path()
-│   └── schema_validator.py     # JSON Schema validation
+│   ├── response_validator.py    # Fluent DSL .status().has_key().json_path()
+│   └── schema_validator.py      # JSON Schema validation
 │
-├── tests/                      # Тестовые сценарии
-│   ├── test_vacancies.py       # Поиск, детали, фильтры, производительность
-│   ├── test_areas.py           # Список, поиск, ID
+├── tests/                       # Тестовые сценарии
+│   ├── test_vacancies.py        # Поиск, детали, фильтры, производительность
+│   ├── test_areas.py            # Список, поиск, ID
 │   ├── test_dictionaries.py     # Справочники
 │   ├── test_integration.py      # Кросс-API сценарии
-│   └── test_smoke.py           # Быстрые smoke тесты
+│   └── test_smoke.py            # Быстрые smoke тесты
 │
 ├── fixtures/                    # Pytest fixtures
-│   ├── api_fixtures.py         # http_client, vacancies_api, areas_api
-│   └── data_fixtures.py        # Загрузка test_data.json
+│   ├── api_fixtures.py          # http_client, vacancies_api, areas_api
+│   └── data_fixtures.py         # Загрузка test_data.json
 │
 ├── data/                        # Тестовые данные
-│   └── test_data.json          # IDs регионов, поисковые запросы
+│   └── test_data.json           # IDs регионов, поисковые запросы
 │
 ├── utils/                       # Утилиты
-│   └── logger.py               # Настроенный логгер
+│   └── logger.py                # Настроенный логгер
 │
 ├── docker/                      # Docker файлы
-│   ├── Dockerfile              # Основной образ
-│   ├── Dockerfile.test         # Образ с линтерами
-│   ├── docker-compose.yml      # Локальный запуск
-│   └── entrypoint.sh           # Точка входа
+│   ├── Dockerfile               # Основной образ
+│   ├── Dockerfile.test          # Образ с линтерами
+│   ├── docker-compose.yml       # Локальный запуск
+│   └── entrypoint.sh            # Точка входа
 │
-├── k8s/                        # Kubernetes манифесты
-│   ├── configmap.yaml          # Конфигурация
+├── k8s/                         # Kubernetes манифесты
+│   ├── configmap.yaml           # Конфигурация
 │   ├── deployment.yaml          # Deployment
-│   ├── service.yaml            # Service
-│   └── secret.example.yaml     # Пример секретов
+│   ├── service.yaml             # Service
+│   └── secret.example.yaml      # Пример секретов
 │
-├── .github/workflows/          # CI/CD
-│   └── ci.yml                 # Линт → Типы → Тесты → Coverage
+├── .github/workflows/           # CI/CD
+│   └── ci.yml                   # Линт → Типы → Тесты → Coverage
 │
-├── conftest.py                # Глобальные fixtures
-├── pytest.ini                 # Конфигурация pytest
-├── pyproject.toml             # Зависимости и инструменты
-├── requirements.txt           # Pip dependencies
-└── .env.example               # Пример переменных окружения
+├── conftest.py                  # Глобальные fixtures
+├── pytest.ini                   # Конфигурация pytest
+├── pyproject.toml               # Зависимости и инструменты
+├── requirements.txt             # Pip dependencies
+└── .env.example                 # Пример переменных окружения
 ```
 
 ---
