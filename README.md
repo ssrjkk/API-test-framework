@@ -519,7 +519,7 @@ markers =
 | K8s apply | `kubectl apply -f k8s/` |
 
 
-## Contacts
+## Контакты
 - Telegram: @ssrjkk
 - Email: ray013lefe@gmail.com
 - GitHub: https://github.com/ssrjkk
