@@ -39,6 +39,11 @@ def validate_json_schema(instance: Any, schema: Dict[str, Any]) -> List[str]:
     return errors
 
 
+def validate_schema(instance: Any, schema: Dict[str, Any]) -> List[str]:
+    """Alias for validate_json_schema for convenience"""
+    return validate_json_schema(instance, schema)
+
+
 def create_response_schema(
     required_fields: Optional[List[str]] = None,
     properties: Optional[Dict[str, Dict[str, Any]]] = None,
