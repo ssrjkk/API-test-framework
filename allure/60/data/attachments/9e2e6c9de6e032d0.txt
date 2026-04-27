@@ -1,2 +1,0 @@
-21:38:10 - INFO - HTTPClient initialized: base_url=https://api.hh.ru, timeout=30, skip_throttle=True
-21:38:10 - WARNING - GET https://api.hh.ru/vacancies/999999999 -> 404 (1ms)
