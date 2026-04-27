@@ -1,0 +1,2 @@
+INFO     api_tests:http_client.py:43 HTTPClient initialized: base_url=https://api.hh.ru, timeout=30, skip_throttle=True
+WARNING  api_tests:http_client.py:104 GET https://api.hh.ru/vacancies -> 500 (1ms) [SERVER ERROR]

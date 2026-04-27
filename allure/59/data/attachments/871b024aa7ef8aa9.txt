@@ -1,0 +1,2 @@
+INFO     api_tests:http_client.py:43 HTTPClient initialized: base_url=https://api.hh.ru, timeout=30, skip_throttle=True
+INFO     api_tests:http_client.py:110 GET https://api.hh.ru/areas/1 -> 200 (1ms)

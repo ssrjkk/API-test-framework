@@ -1,0 +1,2 @@
+21:29:22 - INFO - HTTPClient initialized: base_url=https://api.hh.ru, timeout=30, skip_throttle=True
+21:29:22 - WARNING - GET https://api.hh.ru/vacancies -> 500 (1ms) [SERVER ERROR]
