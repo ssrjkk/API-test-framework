@@ -185,7 +185,6 @@ Allure отчеты: https://ssrjkk.github.io/hh-api-framework/allure/
 ---
 
 **Автор:** ssrjkk  
-**Telegram:** @ssrjkk · **Email:** ray013lefe@gmail.com  
+**Telegram:** @ssrjkk · 
+**Email:** ray013lefe@gmail.com  
 **GitHub:** https://github.com/ssrjkk
-
-*Сделано с инженерной строгостью, а не по туториалам.*
