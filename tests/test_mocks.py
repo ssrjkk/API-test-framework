@@ -5,11 +5,11 @@
 """
 
 import allure
+import pytest
 import responses
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-import pytest
 from api.vacancies_api import VacanciesApi
 from core.http_client import HTTPClient
 

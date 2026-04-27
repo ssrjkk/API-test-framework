@@ -40,20 +40,26 @@ class HTTPClient:
         self.session = requests.Session()
         self._setup_session()
 
-        logger.info(f"HTTPClient initialized: base_url={self.base_url}, timeout={self.timeout}, skip_throttle={self.skip_throttle}")
+        logger.info(
+            f"HTTPClient initialized: base_url={self.base_url}, timeout={self.timeout}, skip_throttle={self.skip_throttle}"
+        )
 
     def _setup_session(self) -> None:
         self.session.headers.update(
             {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "User-Agent": "API-Test-Framework/1.0",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Accept-Language": "en-US,en;q=0.9,ru;q=0.8",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Connection": "keep-alive",
+                "Upgrade-Insecure-Requests": "1",
             }
         )
 
         retry_strategy = Retry(
-            total=0,
-            backoff_factor=0.5,
+            total=3,
+            backoff_factor=1.0,
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
         )
@@ -95,7 +101,9 @@ class HTTPClient:
         elapsed_ms = (time.time() - start_time) * 1000
 
         if response.status_code >= 500:
-            logger.warning(f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms) [SERVER ERROR]")
+            logger.warning(
+                f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms) [SERVER ERROR]"
+            )
         elif response.status_code >= 400:
             logger.warning(f"{method} {url} -> {response.status_code} ({elapsed_ms:.0f}ms)")
         else:

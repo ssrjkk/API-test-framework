@@ -52,7 +52,9 @@ def retry_on_5xx_or_timeout(
     def decorator(func: F) -> F:
         def before_sleep(retry_state: Any) -> None:
             exc_type = (
-                type(retry_state.outcome.exception()).__name__ if retry_state.outcome else "Unknown"
+                type(retry_state.outcome.exception()).__name__
+                if retry_state.outcome
+                else "Unknown"
             )
             logger.warning(f"Попытка {retry_state.attempt_number}/{max_attempts}: {exc_type}")
 
